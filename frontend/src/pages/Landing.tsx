@@ -25,7 +25,6 @@ export const Landing = () => {
         </div>
         <div className="content">
           <div>
-            <h1>Welcome to ChessEnd</h1>
             <div>
               {slides.map((slide, index) => (
                 <div
@@ -37,20 +36,71 @@ export const Landing = () => {
               ))}
             </div>
           </div>
-          <button
-            style={{
-              fontSize: "2.5em",
-              fontWeight: "bold",
-              backgroundColor: "#F28500",
-              width: "35%",
-              height: "15%",
-              marginTop: "6em",
-              borderRadius: "15px",
-            }}
-          >
-            Play
-          </button>
-          {/* <h2>Practice endgames against real opponents!</h2> */}
+          <div>
+            <h2 style={{ fontSize: "2.5em", fontWeight: "bold" }}>
+              Practice endgames against real opponents!
+            </h2>
+            <button
+              style={{
+                fontSize: "2.5em",
+                fontWeight: "bold",
+                backgroundColor: "#F28500",
+                width: "35%",
+                height: "20%",
+                borderRadius: "15px",
+              }}
+            >
+              Play
+            </button>
+          </div>
+          <div style={{ marginTop: "10px" }}>
+            <h1
+              style={{
+                fontSize: "2.5em",
+                fontWeight: "bold",
+                textAlign: "center",
+              }}
+            >
+              🕮What is ChessEnd?
+            </h1>
+            <p
+              style={{
+                fontSize: "1.2em",
+                fontWeight: "bold",
+                textAlign: "center",
+              }}
+            >
+              ChessEnd helps you perfect endgames by playing real opponents.
+              Tackle equal, winning, and losing positions to sharpen your skills
+              to take your game to the next level.
+            </p>
+            <img src="" alt="" />
+          </div>
+          <div>
+            <h1
+              style={{
+                fontSize: "2.5em",
+                fontWeight: "bold",
+                textAlign: "center",
+              }}
+            >
+              ☆Leaderboard
+            </h1>
+            <ol
+              style={{
+                textAlign: "center",
+                fontSize: "1.2em",
+                fontWeight: "bold",
+                padding: "5px",
+              }}
+            >
+              <ul>Magnus Carlsen</ul>
+              <ul>Hikaru Nakamura</ul>
+              <ul>Fabiano Caruana</ul>
+              <ul>Alireza Firouzja</ul>
+              <ul>Nodirbek Abdusattorov</ul>
+            </ol>
+          </div>
         </div>
       </div>
     </>

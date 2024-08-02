@@ -1,17 +1,15 @@
-
+:root{
+  margin-top: 0px;
+}
 .landingGrid{
   display: grid;
   grid-template-columns: .5fr 2fr;
   width: 100%;
-  height: 100%;
 }
 /* content */
 .content{
   display:grid;
   grid-template-columns: 1fr 1fr;
-  margin-left: 10px; 
-  text-align: center;
-  
 }
 .play-button{
   font-size: 2.5em;
