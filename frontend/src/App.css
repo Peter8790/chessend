@@ -22,7 +22,8 @@
   grid-row: 1;
   gap: 10px;
   background-color:#191919 ;
-  height: 100vh;
+  border-radius: 5%;
+  height: 60%;
 }
 
 .buttons{
@@ -47,8 +48,18 @@
   margin-left: 7%;
   position: absolute;
   opacity: 0;
+  height: auto;
   transition: opacity 1s ease-in-out;
 }
 .slide.active {
   opacity: 1;
+}
+
+/* Game */
+.game{
+  display: grid;
+  grid-template-columns: .5fr 2fr 1fr;
+  gap: 10px;
+  padding: 10px;
+  font-size: 1em;
 }

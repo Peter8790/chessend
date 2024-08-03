@@ -1,6 +1,6 @@
 import "./App.css";
 import { Landing } from "./pages/Landing";
-import { Game } from "./pages/Game";
+import { ChessGame } from "./pages/Game";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
       <BrowserRouter basename="/">
         <Routes>
           <Route path="/*" element={<Landing />} />
-          <Route path="/game" element={<Game />} />
+          <Route path="/game" element={<ChessGame />} />
         </Routes>
       </BrowserRouter>
     </>

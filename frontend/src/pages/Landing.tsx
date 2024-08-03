@@ -6,9 +6,12 @@ import AnandCarlsen from "../assets/AnandCarlsen.png";
 import AlburtKasparov from "../assets/AlburtKasparov.png";
 import "../App.css";
 import { useState, useEffect } from "react";
+import { Button } from "../components/Button";
 export const Landing = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = [CarlsenCaruana, AnandCarlsen, AlburtKasparov];
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -36,29 +39,17 @@ export const Landing = () => {
               ))}
             </div>
           </div>
-          <div>
-            <h2 style={{ fontSize: "2.5em", fontWeight: "bold" }}>
-              Practice endgames against real opponents!
-            </h2>
-            <button
-              style={{
-                fontSize: "2.5em",
-                fontWeight: "bold",
-                backgroundColor: "#F28500",
-                width: "35%",
-                height: "20%",
-                borderRadius: "15px",
-              }}
-            >
-              Play
-            </button>
+          <div style={{ marginTop: "20%" }}>
+            <h1>Practice endgames against real opponents!</h1>
+            <Button onClick={() => navigate("/game")} children={"Play"} />
           </div>
-          <div style={{ marginTop: "10px" }}>
+          <div>
             <h1
               style={{
                 fontSize: "2.5em",
                 fontWeight: "bold",
                 textAlign: "center",
+                marginTop: "20%",
               }}
             >
               🕮What is ChessEnd?
@@ -74,32 +65,6 @@ export const Landing = () => {
               Tackle equal, winning, and losing positions to sharpen your skills
               to take your game to the next level.
             </p>
-            <img src="" alt="" />
-          </div>
-          <div>
-            <h1
-              style={{
-                fontSize: "2.5em",
-                fontWeight: "bold",
-                textAlign: "center",
-              }}
-            >
-              ☆Leaderboard
-            </h1>
-            <ol
-              style={{
-                textAlign: "center",
-                fontSize: "1.2em",
-                fontWeight: "bold",
-                padding: "5px",
-              }}
-            >
-              <ul>Magnus Carlsen</ul>
-              <ul>Hikaru Nakamura</ul>
-              <ul>Fabiano Caruana</ul>
-              <ul>Alireza Firouzja</ul>
-              <ul>Nodirbek Abdusattorov</ul>
-            </ol>
           </div>
         </div>
       </div>
