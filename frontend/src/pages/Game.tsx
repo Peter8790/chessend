@@ -1,37 +1,78 @@
-// where game actually happens
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../components/Button";
-import { ChessBoard } from "../components/Chessboard";
-import { MovesHistory } from "../components/MovesHistory";
+import { MoveList } from "../components/MoveList";
 import { useSocket } from "../hooks/useSocket";
+import { Chess, Square } from "chess.js";
+import { Chessboard } from "react-chessboard";
+import "../App.css";
 export const ChessGame = () => {
   const INIT_GAME = "init_game";
   const MOVE = "move";
   const GAME_OVER = "game_over";
+
   const socket = useSocket();
+  const [chess, setChess] = useState(new Chess());
+  const [position, setPosition] = useState("start");
+  const [isGameActive, setIsGameActive] = useState(false);
+
   useEffect(() => {
     if (!socket) {
       return;
     }
+
     socket.onmessage = (event) => {
       const data = JSON.parse(event.data);
       switch (data.type) {
         case INIT_GAME:
-          console.log("init game");
+          setChess(new Chess());
+          setPosition("start");
+          setIsGameActive(true);
+          console.log(data);
+          console.log("Game initialized");
           break;
         case MOVE:
-          console.log("move");
+          const moveData = data.payload;
+          chess.move(moveData.san);
+          setPosition(chess.fen());
+          console.log("Move received:", moveData.san);
+          console.log("Position:", chess.fen());
           break;
         case GAME_OVER:
-          console.log("game over");
+          setIsGameActive(false);
+          console.log("Game over");
           break;
         default:
           break;
       }
     };
-  });
-  if (!socket) return <div>Connecting...</div>;
-  // users needs to be actual users, from database. Guest users are allowed.
+
+    return () => {
+      if (socket) {
+        socket.onmessage = null; // Clean up the socket listener
+      }
+    };
+  }, [socket, chess]);
+
+  const handleMove = (from: Square, to: Square): boolean => {
+    if (!isGameActive) return false;
+
+    const move = chess.move({
+      from,
+      to,
+    });
+
+    if (move) {
+      setPosition(chess.fen());
+      socket.send(JSON.stringify({ type: MOVE, move }));
+      console.log("Move sent:", move);
+      console.log("Position:", chess.fen());
+      return true;
+    } else {
+      console.log("Invalid move");
+      return false;
+    }
+  };
+
   return (
     <div className="game">
       <div>
@@ -39,19 +80,19 @@ export const ChessGame = () => {
       </div>
       <div>
         <h2>Opponent</h2>
-        <div
-          style={{
-            width: "100%",
-            height: "100%",
-          }}
-        >
-          <ChessBoard />
+        <div style={{ width: "100%", height: "100%" }}>
+          <Chessboard
+            position={position}
+            boardWidth={773.3}
+            onPieceDrop={handleMove}
+          />
           <div>
             <h2>Guest7988086990</h2>
           </div>
         </div>
       </div>
-      <div>
+      <div className="move-history">
+        <MoveList />
         <Button
           onClick={() => {
             socket.send(JSON.stringify({ type: INIT_GAME }));
@@ -59,7 +100,6 @@ export const ChessGame = () => {
         >
           Play
         </Button>
-        <MovesHistory />
       </div>
     </div>
   );
